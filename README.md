@@ -1,7 +1,8 @@
 # NewPirateTimes
 
 Swift sample coding project 
-Fetch articles from the NY Times and convert them to Pirate/Pig-Latin
+
+The specifications for this coding challenge was to simply create an app that consumed articles from the NY Times.  There were no other requirements so I had to creatively come up with an original idea. 
 
 The project depends on a few cocoapod repositories:
 
