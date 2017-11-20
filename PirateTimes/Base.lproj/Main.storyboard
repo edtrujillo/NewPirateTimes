@@ -1,24 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fhe-ym-GJT">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--New Pirate Times-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="PirateTimes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Type in a search phrase or word" translatesAutoresizingMaskIntoConstraints="NO" id="YT1-Lo-I8b">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vYZ-hr-ggm">
+                                <rect key="frame" x="8" y="128" width="359" height="29"/>
+                                <segments>
+                                    <segment title="Pirate (argh!)"/>
+                                    <segment title="English"/>
+                                    <segment title="Pig-Latin"/>
+                                </segments>
+                                <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="languageChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="x7e-5c-YVn"/>
+                                </connections>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiA-92-8e8">
+                                <rect key="frame" x="0.0" y="164" width="375" height="503"/>
+                                <connections>
+                                    <segue destination="HRl-Wn-I68" kind="embed" identifier="MainEmbedSegue" id="OHh-TL-EDr"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fiA-92-8e8" secondAttribute="trailing" id="6RX-J9-szv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fiA-92-8e8" secondAttribute="bottom" id="9bQ-vr-jFn"/>
+                            <constraint firstItem="fiA-92-8e8" firstAttribute="top" secondItem="vYZ-hr-ggm" secondAttribute="bottom" constant="8" symbolic="YES" id="Gam-1r-e7F"/>
+                            <constraint firstItem="fiA-92-8e8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gol-Th-Q8Y"/>
+                            <constraint firstItem="vYZ-hr-ggm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="IJu-nj-WWy"/>
+                            <constraint firstItem="YT1-Lo-I8b" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LfK-LK-uma"/>
+                            <constraint firstItem="YT1-Lo-I8b" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cE1-ZJ-jyd"/>
+                            <constraint firstItem="vYZ-hr-ggm" firstAttribute="top" secondItem="YT1-Lo-I8b" secondAttribute="bottom" constant="8" id="fA5-mI-XQW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vYZ-hr-ggm" secondAttribute="trailing" constant="8" id="hp4-YY-zDC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YT1-Lo-I8b" secondAttribute="trailing" id="pob-Xd-K3e"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="New Pirate Times" id="RfP-Ta-6L9"/>
+                    <connections>
+                        <outlet property="searchBar" destination="YT1-Lo-I8b" id="DYH-gi-7Zk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="475.5" y="133.5"/>
+        </scene>
+        <!--Main Table View Controller-->
+        <scene sceneID="9cx-ix-nsH">
+            <objects>
+                <tableViewController id="HRl-Wn-I68" customClass="MainTableViewController" customModule="PirateTimes" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" id="ctZ-XQ-mg7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="503"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PirateTableCell" rowHeight="120" id="O3h-FW-tcN" customClass="MainTableViewCell" customModule="PirateTimes" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="120"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O3h-FW-tcN" id="w5m-Xd-T08">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="119.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pirate75" translatesAutoresizingMaskIntoConstraints="NO" id="6KN-2n-gF9">
+                                            <rect key="frame" x="20" y="20" width="72" height="79.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="72" id="1Ut-ha-kgT"/>
+                                                <constraint firstAttribute="height" constant="79.5" id="VTA-ab-fhR"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9hb-vu-TbP">
+                                            <rect key="frame" x="100" y="20" width="221" height="79.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="6KN-2n-gF9" firstAttribute="top" secondItem="w5m-Xd-T08" secondAttribute="top" constant="20" symbolic="YES" id="6BG-L7-PzW"/>
+                                        <constraint firstItem="9hb-vu-TbP" firstAttribute="leading" secondItem="6KN-2n-gF9" secondAttribute="trailing" constant="8" symbolic="YES" id="AVv-Ky-BKo"/>
+                                        <constraint firstItem="9hb-vu-TbP" firstAttribute="height" relation="greaterThanOrEqual" secondItem="6KN-2n-gF9" secondAttribute="height" id="URU-G0-0tL"/>
+                                        <constraint firstAttribute="trailing" secondItem="9hb-vu-TbP" secondAttribute="trailing" constant="20" symbolic="YES" id="ZEh-wC-l7e"/>
+                                        <constraint firstAttribute="bottom" secondItem="9hb-vu-TbP" secondAttribute="bottom" constant="20" symbolic="YES" id="h8U-On-GFi"/>
+                                        <constraint firstItem="6KN-2n-gF9" firstAttribute="leading" secondItem="w5m-Xd-T08" secondAttribute="leading" constant="20" symbolic="YES" id="lOF-aA-7mJ"/>
+                                        <constraint firstItem="9hb-vu-TbP" firstAttribute="top" secondItem="w5m-Xd-T08" secondAttribute="top" constant="20" symbolic="YES" id="m8E-X4-u3G"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="snippetLabel" destination="9hb-vu-TbP" id="AyL-63-sop"/>
+                                    <outlet property="thumbNail" destination="6KN-2n-gF9" id="ZA3-TG-sd4"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="HRl-Wn-I68" id="j0D-sy-vQG"/>
+                            <outlet property="delegate" destination="HRl-Wn-I68" id="cMo-od-QiQ"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="BCJ-Hp-a88" kind="show" identifier="DetailSegue" id="ruB-Kl-lAB"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cSs-5e-UlJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1125.5999999999999" y="133.5832083958021"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="DPm-vi-HFh">
+            <objects>
+                <viewController id="BCJ-Hp-a88" customClass="WebViewController" customModule="PirateTimes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sgr-gu-kdB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="503"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PvD-Oc-EL7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="503"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="PvD-Oc-EL7" firstAttribute="leading" secondItem="OJl-w7-H6z" secondAttribute="leading" id="EUn-h5-lhn"/>
+                            <constraint firstItem="OJl-w7-H6z" firstAttribute="trailing" secondItem="PvD-Oc-EL7" secondAttribute="trailing" id="IWv-BY-6sV"/>
+                            <constraint firstItem="OJl-w7-H6z" firstAttribute="bottom" secondItem="PvD-Oc-EL7" secondAttribute="bottom" id="bsi-wR-HgS"/>
+                            <constraint firstItem="OJl-w7-H6z" firstAttribute="top" secondItem="PvD-Oc-EL7" secondAttribute="top" constant="20" id="qPe-T9-y7z"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OJl-w7-H6z"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="PvD-Oc-EL7" id="ZqM-WT-Y4x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="euM-Il-iFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1844" y="108.39580209895054"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aUb-nf-id7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fhe-ym-GJT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BYV-Jo-h60">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="mAb-eY-UYZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nlx-hp-fMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-235.19999999999999" y="102.54872563718142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pirate75" width="75" height="75"/>
+    </resources>
 </document>
